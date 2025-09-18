@@ -1,5 +1,19 @@
-import 'package:bmi_calculator/bmi_calculator.dart' as bmi_calculator;
+// main.dart
+import 'dart:io';
 
-void main(List<String> arguments) {
-  print('Hello world: ${bmi_calculator.calculate()}!');
+void main() {
+  stdout.write("Masukkan berat badan (kg): ");
+  String? beratInput = stdin.readLineSync();
+  double? berat = double.tryParse(beratInput ?? "");
+
+  stdout.write("Masukkan tinggi badan (cm): ");
+  String? tinggiInput = stdin.readLineSync();
+  double? tinggi = double.tryParse(tinggiInput ?? "");
+
+  if (berat == null || tinggi == null || berat <= 0 || tinggi <= 0) {
+    print("❌ Input tidak valid! Berat dan tinggi harus berupa angka positif.");
+    return;
+  }
+
+  print("✅ Input valid. Berat: $berat kg, Tinggi: $tinggi cm");
 }

@@ -3,17 +3,30 @@ import 'dart:io';
 
 void main() {
   stdout.write("Masukkan berat badan (kg): ");
-  String? beratInput = stdin.readLineSync();
-  double? berat = double.tryParse(beratInput ?? "");
+  double berat = double.parse(stdin.readLineSync()!);
 
   stdout.write("Masukkan tinggi badan (cm): ");
-  String? tinggiInput = stdin.readLineSync();
-  double? tinggi = double.tryParse(tinggiInput ?? "");
+  double tinggiCm = double.parse(stdin.readLineSync()!);
 
-  if (berat == null || tinggi == null || berat <= 0 || tinggi <= 0) {
-    print("❌ Input tidak valid! Berat dan tinggi harus berupa angka positif.");
+  if (berat <= 0 || tinggiCm <= 0) {
+    print("❌ Input tidak valid!");
     return;
   }
 
-  print("✅ Input valid. Berat: $berat kg, Tinggi: $tinggi cm");
+  double tinggiM = tinggiCm / 100;
+  double bmi = berat / (tinggiM * tinggiM);
+
+  String kategori;
+  if (bmi < 18.5) {
+    kategori = "Kurus";
+  } else if (bmi < 25) {
+    kategori = "Normal";
+  } else if (bmi < 30) {
+    kategori = "Gemuk";
+  } else {
+    kategori = "Obesitas";
+  }
+
+  print("✅ BMI Anda: ${bmi.toStringAsFixed(2)}");
+  print("Kategori: $kategori");
 }
